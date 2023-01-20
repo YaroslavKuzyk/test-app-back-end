@@ -15,7 +15,7 @@ class fileService{
         }
     }
 
-    deleteFile(picturfilee) {
+    deleteFile(file) {
         try {
             fs.unlinkSync(`static/${file}`)
         } catch (error) {
