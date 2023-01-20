@@ -1,31 +1,9 @@
-import * as uuid from 'uuid';
-import * as path from 'path';
-import fs from 'fs'
+import fileSercive from './fileSercive.js';
 import galleryModel from '../models/galleryModel.js'
 
 class galleryService {
-    saveFile(picture) {
-        try {
-            const pictureName = uuid.v4() + '.jpg'
-            const picturePath = path.resolve('static', pictureName)
-            picture.mv(picturePath)
-
-            return pictureName
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    deleteFile(picture) {
-        try {
-            fs.unlinkSync(`static/${picture}`)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     async create(gallery, picture) {
-        const pictureName = this.saveFile(picture);
+        const pictureName = fileSercive.saveFile(picture);
         const createGallery = await galleryModel.create({...gallery, picture: pictureName});
         return createGallery;
     }
@@ -50,7 +28,7 @@ class galleryService {
         }
 
         const { picture } = await galleryModel.findById(id)
-        this.deleteFile (picture)
+        fileSercive.deleteFile (picture)
         const pictureName = await galleryModel.findOneAndDelete(id)
         return pictureName
     }
