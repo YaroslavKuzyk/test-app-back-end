@@ -3,21 +3,21 @@ import * as path from 'path';
 import fs from 'fs'
 
 class fileService{
-    saveFile(picture) {
+    saveFile(file) {
         try {
-            const pictureName = uuid.v4() + '.jpg'
-            const picturePath = path.resolve('static', pictureName)
-            picture.mv(picturePath)
+            const fileName = uuid.v4() + '.jpg'
+            const filePath = path.resolve('static', fileName)
+            file.mv(filePath)
 
-            return pictureName
+            return fileName
         } catch (error) {
             console.log(error);
         }
     }
 
-    deleteFile(picture) {
+    deleteFile(picturfilee) {
         try {
-            fs.unlinkSync(`static/${picture}`)
+            fs.unlinkSync(`static/${file}`)
         } catch (error) {
             console.log(error)
         }
