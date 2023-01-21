@@ -1,11 +1,11 @@
 import Router from 'express'
-import galleryController from '../controllers/galleryController.js'
+import GalleryController from '../controllers/GalleryController.js'
 
-const router = new Router()
+const galleryRouter = new Router()
 
-router.post('/gallery', galleryController.create)
-router.get('/gallery', galleryController.getAll)
-router.get('/gallery/:id', galleryController.getById)
-router.delete('/gallery/:id', galleryController.delete)
+galleryRouter.post('/gallery', GalleryController.create)
+galleryRouter.get('/gallery', GalleryController.getAll)
+galleryRouter.get('/gallery/:id', GalleryController.getById)
+galleryRouter.delete('/gallery/:id', GalleryController.delete)
 
-export default router
+export default galleryRouter

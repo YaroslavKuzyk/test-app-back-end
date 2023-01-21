@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import galleryRouter from './routers/galleryRouter.js'
+import adminRouter from './routers/adminRouter.js'
 import fileUpload from 'express-fileupload'
 import cors from 'cors'
 
@@ -15,6 +16,7 @@ app.use(express.static('static'))
 app.use(fileUpload({}))
 
 app.use('/api', galleryRouter)
+app.use('/api', adminRouter)
 
 
 async function start() {
