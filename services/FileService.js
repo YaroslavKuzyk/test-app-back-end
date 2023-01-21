@@ -2,7 +2,7 @@ import * as uuid from 'uuid';
 import * as path from 'path';
 import fs from 'fs'
 
-class fileService{
+class FileService{
     saveFile(file) {
         try {
             const fileName = uuid.v4() + '.jpg'
@@ -24,4 +24,4 @@ class fileService{
     }
 }
 
-export default new fileService()
+export default new FileService()

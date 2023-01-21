@@ -1,9 +1,9 @@
-import galleryService from "../services/galleryService.js";
+import GalleryService from "../services/GalleryService.js";
 
-class galleryController {
+class GalleryController {
   async create(req, res) {
     try {
-      const picture = await galleryService.create(req.body, req.files.picture);
+      const picture = await GalleryService.create(req.body, req.files.picture);
       res.json(picture);
     } catch (error) {
       res.status(500).json(error);
@@ -12,7 +12,7 @@ class galleryController {
 
   async getAll(req, res) {
     try {
-      const picture = await galleryService.getAll();
+      const picture = await GalleryService.getAll();
       return res.json(picture);
     } catch (error) {
       res.status(500).json(error);
@@ -21,7 +21,7 @@ class galleryController {
 
   async getById(req, res) {
     try {
-      const picture = await galleryService.getById(req.params.id);
+      const picture = await GalleryService.getById(req.params.id);
       return res.json(picture);
     } catch (error) {
       res.status(500).json(error);
@@ -30,7 +30,7 @@ class galleryController {
 
   async delete(req, res) {
     try {
-      const picture = await galleryService.delete(req.params.id);
+      const picture = await GalleryService.delete(req.params.id);
       return res.json(picture);
     } catch (error) {
       res.status(500).json(error);
@@ -38,4 +38,4 @@ class galleryController {
   }
 }
 
-export default new galleryController();
+export default new GalleryController();

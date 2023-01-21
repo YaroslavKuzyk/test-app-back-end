@@ -1,37 +1,57 @@
-import fileSercive from './fileSercive.js';
-import galleryModel from '../models/galleryModel.js'
+import FileService from "./FileService.js";
+import galleryModel from "../models/galleryModel.js";
 
-class galleryService {
-    async create(gallery, picture) {
-        const pictureName = fileSercive.saveFile(picture);
-        const createGallery = await galleryModel.create({...gallery, picture: pictureName});
-        return createGallery;
+class GalleryService {
+  async create(gallery, picture) {
+    try {
+      const pictureName = FileService.saveFile(picture);
+      const createGallery = await galleryModel.create({
+        ...gallery,
+        picture: pictureName,
+      });
+      return createGallery;
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    async getAll() {
-        const pictures = await galleryModel.find()
-        return pictures
+  async getAll() {
+    try {
+      const pictures = await galleryModel.find();
+      return pictures;
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    async getById(id) {
-        if(!id) {
-            throw new Error('No id')
-        }
+  async getById(id) {
+    try {
+      if (!id) {
+        throw new Error("No id");
+      }
 
-        const picture = await galleryModel.findById(id)
-        return picture
+      const picture = await galleryModel.findById(id);
+      return picture;
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    async delete(id) {
-        if(!id) {
-            throw new Error('No id')
-        }
+  async delete(id) {
+    try {
+      if (!id) {
+        throw new Error("No id");
+      }
 
-        const { picture } = await galleryModel.findById(id)
-        fileSercive.deleteFile (picture)
-        const pictureName = await galleryModel.findOneAndDelete(id)
-        return pictureName
+      
+      const pictureName = await galleryModel.findOneAndDelete(id);
+      const { picture } = await galleryModel.findById(id);
+      FileService.deleteFile(picture);
+      return pictureName;
+    } catch (error) {
+      console.log(error);
     }
+  }
 }
 
-export default new galleryService()
+export default new GalleryService();
