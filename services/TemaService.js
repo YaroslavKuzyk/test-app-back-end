@@ -1,15 +1,16 @@
 import FileService from "./FileService.js";
-import galleryModel from "../models/galleryModel.js";
+import teamModel from "../models/teamModel.js";
 
-class GalleryService {
-  async create(gallery, picture) {
+class TemaService {
+  async create(team, picture) {
     try {
       const pictureName = FileService.saveFile(picture);
-      const createGallery = await galleryModel.create({
-        ...gallery,
+      const createTeam = await teamModel.create({
+        ...team,
         picture: pictureName,
       });
-      return createGallery;
+
+      return createTeam;
     } catch (error) {
       console.log(error);
     }
@@ -17,8 +18,7 @@ class GalleryService {
 
   async getAll() {
     try {
-      const pictures = await galleryModel.find();
-      return pictures;
+      return await teamModel.find();
     } catch (error) {
       console.log(error);
     }
@@ -30,8 +30,7 @@ class GalleryService {
         throw new Error("No id");
       }
 
-      const picture = await galleryModel.findById(id);
-      return picture;
+      return await teamModel.findById(id);
     } catch (error) {
       console.log(error);
     }
@@ -43,8 +42,8 @@ class GalleryService {
         throw new Error("No id");
       }
 
-      const { picture } = await galleryModel.findById(id);
-      await galleryModel.findOneAndDelete(id);
+      const { picture } = await teamModel.findById(id);
+      await teamModel.findOneAndDelete(id);
       FileService.deleteFile(picture);
       return {message: 'Успішно видалено'};
     } catch (error) {
@@ -53,4 +52,4 @@ class GalleryService {
   }
 }
 
-export default new GalleryService();
+export default new TemaService();

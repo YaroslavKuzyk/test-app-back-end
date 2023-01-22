@@ -7,8 +7,8 @@ import galleryRouter from './routers/galleryRouter.js'
 import adminRouter from './routers/adminRouter.js'
 import categoryRouter from './routers/categoryRouter.js'
 import contactRouter from './routers/ContactRouter.js'
-
-
+import sliderRouter from './routers/sliderRouter.js'
+import teamRouter from './routers/teamRouter.js'
 
 const PORT = 8080
 const DB = 'mongodb+srv://admin:admin@cluster0.tetakbn.mongodb.net/?retryWrites=true&w=majority'
@@ -24,6 +24,8 @@ app.use('/api', galleryRouter)
 app.use('/api', adminRouter)
 app.use('/api', categoryRouter)
 app.use('/api', contactRouter)
+app.use('/api', sliderRouter)
+app.use('/api', teamRouter)
 
 
 async function start() {
