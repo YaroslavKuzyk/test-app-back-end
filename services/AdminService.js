@@ -1,20 +1,42 @@
 import adminModel from "../models/adminModel.js";
+import bcryptjs from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import config from "../config.js";
+
+function generateAccessToken(id) {
+  const payload = {id}
+
+  return jwt.sign(payload, config.secret, {expiresIn: '5m'})
+}
 
 class AdminService {
-  async login(body) {
+  async registration(body) {
     try {
       const { login, password } = body;
-      const admin = await adminModel.findOne({ login });
+      const hashPassword = bcryptjs.hashSync(password, 7)
+      return await adminModel.create({login, password: hashPassword})
+    } catch (error) {
+      return error;
+    }
+  }
+  async login(body) {
+    try {
+      const {login, password} = body
+      const admin = await adminModel.findOne({login})
 
-      if (!admin) {
-        return { isAdmin: false, message: "Невірне імʼя користувача" };
+      if(!admin) {
+        return {message: 'Користувач не знайдений'}
       }
 
-      if (password != admin.password) {
-        return { isAdmin: false, message: "Пароль не вірний" };
+      const validPassword = bcryptjs.compareSync(password, admin.password)  
+      
+      if(!validPassword) {
+        return {message: 'Не вірний пароль'}
       }
 
-      return { isAdmin: true, message: "Успіх" };
+      const generateToken = generateAccessToken(admin._id)
+
+      return {token: generateToken}
     } catch (error) {
       return error;
     }
