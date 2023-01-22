@@ -4,6 +4,10 @@ class CategoryService {
   async create(body) {
     try {
       const { categoryName } = body;
+      const candidate = await categoryModel.findOne({categoryName})
+      if(candidate) {
+        return {message: 'Категорія вже була створена'}
+      }
       return await categoryModel.create({ categoryName });
     } catch (error) {
       console.log(error);
