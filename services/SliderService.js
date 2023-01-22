@@ -1,15 +1,16 @@
 import FileService from "./FileService.js";
-import galleryModel from "../models/galleryModel.js";
+import sliderModel from "../models/sliderModel.js";
 
-class GalleryService {
-  async create(gallery, picture) {
+class SliderService {
+  async create(slider, picture) {
     try {
       const pictureName = FileService.saveFile(picture);
-      const createGallery = await galleryModel.create({
-        ...gallery,
+      const createSlider = await sliderModel.create({
+        ...slider,
         picture: pictureName,
       });
-      return createGallery;
+
+      return createSlider;
     } catch (error) {
       console.log(error);
     }
@@ -17,8 +18,7 @@ class GalleryService {
 
   async getAll() {
     try {
-      const pictures = await galleryModel.find();
-      return pictures;
+      return await sliderModel.find();
     } catch (error) {
       console.log(error);
     }
@@ -30,8 +30,7 @@ class GalleryService {
         throw new Error("No id");
       }
 
-      const picture = await galleryModel.findById(id);
-      return picture;
+      return await sliderModel.findById(id);
     } catch (error) {
       console.log(error);
     }
@@ -43,8 +42,8 @@ class GalleryService {
         throw new Error("No id");
       }
 
-      const { picture } = await galleryModel.findById(id);
-      await galleryModel.findOneAndDelete(id);
+      const { picture } = await sliderModel.findById(id);
+      await sliderModel.findOneAndDelete(id);
       FileService.deleteFile(picture);
       return {message: 'Успішно видалено'};
     } catch (error) {
@@ -53,4 +52,4 @@ class GalleryService {
   }
 }
 
-export default new GalleryService();
+export default new SliderService();
