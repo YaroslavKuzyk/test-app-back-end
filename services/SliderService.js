@@ -12,7 +12,7 @@ class SliderService {
 
       return createSlider;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -20,7 +20,7 @@ class SliderService {
     try {
       return await sliderModel.find();
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -32,7 +32,7 @@ class SliderService {
 
       return await sliderModel.findById(id);
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -47,7 +47,7 @@ class SliderService {
       FileService.deleteFile(picture);
       return {message: 'Успішно видалено'};
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 }

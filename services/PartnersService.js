@@ -9,7 +9,7 @@ class PartnersService {
         picture: pictureName,
       });
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -17,7 +17,7 @@ class PartnersService {
     try {
       return await partnersModel.find();
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -29,7 +29,7 @@ class PartnersService {
 
       return await partnersModel.findById(id);
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -44,7 +44,7 @@ class PartnersService {
       FileService.deleteFile(picture);
       return {message: 'Успішно видалено'};
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 }

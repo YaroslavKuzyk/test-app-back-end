@@ -10,6 +10,7 @@ import contactRouter from './routers/ContactRouter.js'
 import sliderRouter from './routers/sliderRouter.js'
 import teamRouter from './routers/teamRouter.js'
 import partnersRouter from './routers/partnersRouter.js'
+import planRouter from './routers/planRouter.js'
 
 const PORT = 8080
 const DB = 'mongodb+srv://admin:admin@cluster0.tetakbn.mongodb.net/?retryWrites=true&w=majority'
@@ -28,13 +29,14 @@ app.use('/api', contactRouter)
 app.use('/api', sliderRouter)
 app.use('/api', teamRouter)
 app.use('/api', partnersRouter)
+app.use('/api', planRouter)
 
 async function start() {
     try {
         await mongoose.connect(DB)
         app.listen(PORT, ()=> console.log(`Server started on ${PORT} port`))
     } catch (error) {
-        console.log(error);
+        return error;
     }
 }
 

@@ -16,7 +16,7 @@ class AdminService {
 
       return { isAdmin: true, message: "Успіх" };
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 }

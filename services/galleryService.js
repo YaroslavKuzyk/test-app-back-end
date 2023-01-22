@@ -11,7 +11,7 @@ class GalleryService {
       });
       return createGallery;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -20,7 +20,7 @@ class GalleryService {
       const pictures = await galleryModel.find();
       return pictures;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -33,7 +33,7 @@ class GalleryService {
       const picture = await galleryModel.findById(id);
       return picture;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -48,7 +48,7 @@ class GalleryService {
       FileService.deleteFile(picture);
       return {message: 'Успішно видалено'};
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 }

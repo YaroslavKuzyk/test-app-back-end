@@ -12,7 +12,7 @@ class TemaService {
 
       return createTeam;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -20,7 +20,7 @@ class TemaService {
     try {
       return await teamModel.find();
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -32,7 +32,7 @@ class TemaService {
 
       return await teamModel.findById(id);
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -47,7 +47,7 @@ class TemaService {
       FileService.deleteFile(picture);
       return {message: 'Успішно видалено'};
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 }

@@ -11,7 +11,7 @@ class FileService{
 
             return fileName
         } catch (error) {
-            console.log(error);
+            return error;
         }
     }
 
@@ -19,7 +19,7 @@ class FileService{
         try {
             fs.unlinkSync(`static/${file}`)
         } catch (error) {
-            console.log(error)
+            return error
         }
     }
 }
