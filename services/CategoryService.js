@@ -10,7 +10,7 @@ class CategoryService {
       }
       return await categoryModel.create({ categoryName });
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -18,7 +18,7 @@ class CategoryService {
     try {
       return await categoryModel.find();
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
@@ -30,7 +30,7 @@ class CategoryService {
 
       return await categoryModel.findOneAndDelete(id)
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 }
