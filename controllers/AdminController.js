@@ -6,7 +6,7 @@ class AdminController {
       const isAdmin = await AdminService.login(req.body);
       res.json(isAdmin);
     } catch (error) {
-      console.log(error);
+      res.status(500).json(error);
     }
   }
 }

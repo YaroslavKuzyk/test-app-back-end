@@ -6,7 +6,7 @@ class CategoryController {
         const category = await CategoryService.create(req.body)
         res.json(category)
     } catch (error) {
-        console.log(error);
+      res.status(500).json(error);
     }
   }
   async getAll(req, res) {
@@ -14,7 +14,7 @@ class CategoryController {
         const category = await CategoryService.getAll()
         res.json(category)
     } catch (error) {
-        console.log(error);
+      res.status(500).json(error);
     }
   }
   async delete(req, res) {
@@ -22,7 +22,7 @@ class CategoryController {
         await CategoryService.delete(req.params.id)
         res.json({message: 'Категорія успішно видаленна'})
     } catch (error) {
-        console.log(error);
+      res.status(500).json(error);
     }
   }
 }
