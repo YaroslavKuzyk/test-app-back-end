@@ -7,14 +7,14 @@ class AdminService {
       const admin = await adminModel.findOne({ login });
 
       if (!admin) {
-        return { isAdmin: false, message: "Неверное имя пользователя" };
+        return { isAdmin: false, message: "Невірне імʼя користувача" };
       }
 
       if (password != admin.password) {
-        return { isAdmin: false, message: "Неверный пароль" };
+        return { isAdmin: false, message: "Пароль не вірний" };
       }
 
-      return { isAdmin: true, message: "Вы успешно вошли" };
+      return { isAdmin: true, message: "Успіх" };
     } catch (error) {
       console.log(error);
     }

@@ -1,9 +1,13 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import galleryRouter from './routers/galleryRouter.js'
-import adminRouter from './routers/adminRouter.js'
 import fileUpload from 'express-fileupload'
 import cors from 'cors'
+
+import galleryRouter from './routers/galleryRouter.js'
+import adminRouter from './routers/adminRouter.js'
+import categoryRouter from './routers/categoryRouter.js'
+
+
 
 const PORT = 8080
 const DB = 'mongodb+srv://admin:admin@cluster0.tetakbn.mongodb.net/?retryWrites=true&w=majority'
@@ -17,6 +21,7 @@ app.use(fileUpload({}))
 
 app.use('/api', galleryRouter)
 app.use('/api', adminRouter)
+app.use('/api', categoryRouter)
 
 
 async function start() {
