@@ -6,6 +6,7 @@ import cors from 'cors'
 import galleryRouter from './routers/galleryRouter.js'
 import adminRouter from './routers/adminRouter.js'
 import categoryRouter from './routers/categoryRouter.js'
+import contactRouter from './routers/ContactRouter.js'
 
 
 
@@ -22,6 +23,7 @@ app.use(fileUpload({}))
 app.use('/api', galleryRouter)
 app.use('/api', adminRouter)
 app.use('/api', categoryRouter)
+app.use('/api', contactRouter)
 
 
 async function start() {
