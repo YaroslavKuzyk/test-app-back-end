@@ -6,7 +6,7 @@ import config from "../config.js";
 function generateAccessToken(id) {
   const payload = {id}
 
-  return jwt.sign(payload, config.secret, {expiresIn: '5m'})
+  return jwt.sign(payload, config.secret)
 }
 
 class AdminService {
@@ -36,7 +36,7 @@ class AdminService {
 
       const generateToken = generateAccessToken(admin._id)
 
-      return {token: generateToken}
+      return {token: generateToken, admin}
     } catch (error) {
       return error;
     }

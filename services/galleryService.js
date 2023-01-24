@@ -5,11 +5,11 @@ class GalleryService {
   async create(gallery, picture) {
     try {
       const pictureName = FileService.saveFile(picture);
-      const createGallery = await galleryModel.create({
+      await galleryModel.create({
         ...gallery,
         picture: pictureName,
       });
-      return createGallery;
+      return this.getAll();
     } catch (error) {
       return error;
     }
@@ -46,7 +46,7 @@ class GalleryService {
       const { picture } = await galleryModel.findById(id);
       await galleryModel.findOneAndDelete(id);
       FileService.deleteFile(picture);
-      return {message: 'Успішно видалено'};
+      return this.getAll()
     } catch (error) {
       return error;
     }
