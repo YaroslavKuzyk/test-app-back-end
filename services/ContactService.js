@@ -3,8 +3,8 @@ import contactModel from "../models/contactModel.js";
 class ContactService {
   async create(body) {
     try {
-      const { name, email, text } = body;
-      return await contactModel.create({ name, email, text });
+      const { name, email, text, date } = body;
+      return await contactModel.create({ name, email, text, date });
     } catch (error) {
       return error;
     }
@@ -36,7 +36,8 @@ class ContactService {
         throw new Error("No id");
       }
        
-      return await contactModel.findByIdAndUpdate(id, body, {new: true})
+      await contactModel.findByIdAndUpdate(id, body, {new: true})
+      return contactModel.find()
     } catch (error) {
       return error;
     }
@@ -48,7 +49,7 @@ class ContactService {
         throw new Error("No id");
       }
       await contactModel.findOneAndDelete({id})
-      return {message: 'Успішно видаленно'}
+      return contactModel.find()
     } catch (error) {
       return error;
     }

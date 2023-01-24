@@ -12,6 +12,7 @@ class GalleryController {
 
   async getAll(req, res) {
     try {
+      console.log(req);
       const picture = await GalleryService.getAll();
       return res.json(picture);
     } catch (error) {

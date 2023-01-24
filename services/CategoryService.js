@@ -6,9 +6,10 @@ class CategoryService {
       const { categoryName } = body;
       const candidate = await categoryModel.findOne({categoryName})
       if(candidate) {
-        return {message: 'Категорія вже була створена'}
+        return categoryModel.find()
       }
-      return await categoryModel.create({ categoryName });
+      await categoryModel.create({ categoryName });
+      return categoryModel.find()
     } catch (error) {
       return error;
     }
@@ -28,7 +29,8 @@ class CategoryService {
         throw new Error("No id");
       }
 
-      return await categoryModel.findOneAndDelete(id)
+      await categoryModel.findByIdAndDelete(id)
+      return categoryModel.find()
     } catch (error) {
       return error;
     }
